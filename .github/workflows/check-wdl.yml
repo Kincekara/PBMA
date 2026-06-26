@@ -27,8 +27,7 @@ jobs:
 
       - name: Validate WDL with MiniWDL
         run: |
-          miniwdl check workflows/wf_haphir_batch.wdl
-          miniwdl check workflows/wf_haphir.wdl
+          miniwdl check workflows/wf_pbma.wdl
 
   cromwell-check:
     name: Cromwell validation
@@ -50,4 +49,4 @@ jobs:
 
       - name: Validate WDL with Cromwell
         run: |
-          java -jar womtool-92.jar validate workflows/wf_haphir.wdl
+          java -jar womtool-92.jar validate workflows/wf_pbma.wdl
