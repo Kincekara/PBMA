@@ -16,7 +16,7 @@ The workflow performs three main steps:
 
 ## Terra
 
-- The pipeline is available as a [Dockstore workflow](https://dockstore.org/workflows/github.com/Kincekara/pbma/PBMA) that can be imported directly into Terra for cloud execution.
+- The pipeline is available as a [Dockstore workflow](https://dockstore.org/workflows/github.com/Kincekara/PBMA/PBMA) that can be imported directly into Terra for cloud execution.
 
 ### Inputs
 
@@ -37,7 +37,7 @@ The workflow performs three main steps:
 ### Installation
 
 ```bash
-git clone https://github.com/Kincekara/pbma.git
+git clone https://github.com/Kincekara/PBMA.git
 ```
 
 ### Single Sample Assembly
