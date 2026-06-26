@@ -52,5 +52,7 @@ task assembly {
         cpu: cpu
         memory: "32 GB"
         disks: "local-disk 100 SSD"
+        preemptible: 0
+        maxRetries: 2
     }
 }
