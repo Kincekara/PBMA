@@ -53,9 +53,10 @@ workflow pbma {
     } 
 
     output {
-        String version = "PBMA v0.1.0"
+        String version = "PBMA v0.1.1"
         File pb_final_assembly = assembly.final_assembly
         File pb_final_rotated_assembly = assembly.final_rotated_assembly
+        File pb_assembly_log = assembly.log
         Array[String] program_versions = [  "lrge: " + estimate_genome_size.lrge_version,
                                             "rasusa: " + downsample.rasusa_version,
                                             "smrttools: " + "13.1.0.221970"

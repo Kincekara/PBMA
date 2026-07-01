@@ -36,7 +36,7 @@ task assembly {
         --task-option motif_min_fraction=0.3 \
         --task-option run_find_motifs=True \
         --nproc ~{cpu} \
-        --output-dir out > pbma.log
+        --output-dir out > ~{id}.pbma.log
 
         cp out/outputs/assembly.rotated.polished.renamed.fsa ./~{id}.rotated.polished.renamed.fsa
         cp out/outputs/polished_assembly.fasta ./~{id}.polished.fasta   
@@ -45,6 +45,7 @@ task assembly {
     output {
         File final_assembly = "~{id}.polished.fasta"
         File final_rotated_assembly = "~{id}.rotated.polished.renamed.fsa"
+        File log = "~{id}.pbma.log"
     }
 
     runtime {
