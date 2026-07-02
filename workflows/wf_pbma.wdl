@@ -16,8 +16,8 @@ workflow pbma {
             description: "Unique identifier for the assembly"
         }
         long_fq: {
-            description: "PacBio HiFi reads in bam or fastq format",
-            patterns: [".bam", ".fastq.gz"]
+            description: "PacBio HiFi reads in bam format",
+            patterns: ["*.bam"]
         }
         basemods: {
             description: "Whether to evaluate kinetics",
@@ -37,28 +37,28 @@ workflow pbma {
             long_fq = long_fq
     }
 
-    call rasusa.downsample {
+    call rasusa.downsample2bam {
         input:
             id = id,
             long_fq = long_fq,
-            genome_size = estimate_genome_size.genome_size
+            genome_size = estimate_genome_size.rounded_gs
     }
 
     call pbassembly.assembly {
     input:
         id = id,
-        bam = downsample.downsampled_bam,
+        bam = downsample2bam.downsampled_bam,
         basemods = basemods,
-        genome_size = estimate_genome_size.genome_size
+        genome_size = estimate_genome_size.rounded_gs
     } 
 
     output {
-        String version = "PBMA v0.1.1"
+        String version = "PBMA v0.2.0"
         File pb_final_assembly = assembly.final_assembly
         File pb_final_rotated_assembly = assembly.final_rotated_assembly
         File pb_assembly_log = assembly.log
         Array[String] program_versions = [  "lrge: " + estimate_genome_size.lrge_version,
-                                            "rasusa: " + downsample.rasusa_version,
+                                            "rasusa: " + downsample2bam.rasusa_version,
                                             "smrttools: " + "13.1.0.221970"
                                         ]
     }
