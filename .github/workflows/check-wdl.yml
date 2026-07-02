@@ -28,7 +28,7 @@ jobs:
       - name: Validate WDL with MiniWDL
         run: |
           miniwdl check workflows/wf_pbma.wdl
-          miniwdl check tasks/wf_ipa.wdl
+          miniwdl check workflows/wf_ipa.wdl
 
   cromwell-check:
     name: Cromwell validation
