@@ -16,15 +16,19 @@ The workflow performs three main steps:
 
 ## Terra
 
-- The pipeline is available as a [Dockstore workflow](https://dockstore.org/workflows/github.com/Kincekara/PBMA/PBMA) that can be imported directly into Terra for cloud execution.
+- The [PBMA](https://dockstore.org/workflows/github.com/Kincekara/PBMA/PBMA) pipeline is available in Dockstore as a that can be imported directly into Terra for cloud execution.
 
+- The alternative workflow [IPA](https://dockstore.org/workflows/github.com/Kincekara/PBMA/IPA) for fastq input files is also available in Dockstore.
 ### Inputs
 
 | Input | Type | Description |
 |-------|------|-------------|
-| `id` | String | Sample identifier |
-| `long_fq` | File | PacBio HiFi reads (FASTQ or BAM) |
-| `basemods` | Boolean | Whether to evaluate kinetics |
+| `id` | String | Sample identifier | 
+| `long_fq` | File | PacBio HiFi reads | 
+| `basemods` | Boolean | Whether to evaluate kinetics | 
+
+> [!NOTE]
+> The `basemods` parameter is only applicable to the PBMA workflow. PBMA only accepts BAM input files, while the IPA workflow accepts both BAM and FASTQ input files. 
 
 ## Local Execution
 
