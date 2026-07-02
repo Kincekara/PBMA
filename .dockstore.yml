@@ -8,3 +8,12 @@ workflows:
    authors:
     - orcid: 0000-0001-7915-9847
    topic: PacBio Microbial Assembly
+
+ - name: IPA
+   subclass: WDL
+   primaryDescriptorPath: /workflows/wf_ipa.wdl
+   testParameterFiles:
+    - /assets/empty.json
+   authors:
+    - orcid: 0000-0001-7915-9847
+   topic: Improved Phased Assembly
