@@ -19,14 +19,18 @@ task estimate_genome_size {
         -o gsize.txt \
         ~{long_fq}   
 
-        # round genome size
-        printf "%dM\n" $(( ($(cat gsize.txt) +500000)/1000000 )) > GSIZE
+        # rounded integer
+        printf "%d\n" $(( ($(cat gsize.txt) +500000)/1000000 * 1000000 )) > GSIZE
+
+        # rounded string
+        printf "%dM\n" $(( ($(cat gsize.txt) +500000)/1000000 )) > SGSIZE
     >>>
 
     output {
         String lrge_version = read_string("VERSION")
         File lrge_gs = "gsize.txt"
-        String genome_size = read_string("GSIZE")
+        Int est_gs = read_int("GSIZE")
+        String rounded_gs = read_string("SGSIZE")
     }
 
     runtime {
