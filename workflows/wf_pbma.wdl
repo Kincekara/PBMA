@@ -24,12 +24,18 @@ workflow pbma {
             patterns: ["true", "false"],
             default: "false"
         }
+        coverage: {
+            description: "Target coverage for downsampling",
+            patterns: ["[0-9]+"],
+            default: "100"
+        }
     }
 
     input {
     String id
     File long_fq
     Boolean? basemods
+    Int? coverage
     }
 
     call lrge.estimate_genome_size {
@@ -41,7 +47,8 @@ workflow pbma {
         input:
             id = id,
             long_fq = long_fq,
-            genome_size = estimate_genome_size.rounded_gs
+            genome_size = estimate_genome_size.rounded_gs,
+            coverage = coverage
     }
 
     call pbassembly.assembly {
@@ -53,7 +60,7 @@ workflow pbma {
     } 
 
     output {
-        String version = "PBMA v0.2.0"
+        String version = "PBMA v0.2.1"
         File pb_final_assembly = assembly.final_assembly
         File pb_final_rotated_assembly = assembly.final_rotated_assembly
         File pb_assembly_log = assembly.log

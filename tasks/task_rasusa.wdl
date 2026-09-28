@@ -5,6 +5,7 @@ task downsample2bam {
         String id
         File long_fq
         String genome_size
+        Int coverage = 100
     }
 
     command <<<
@@ -16,7 +17,7 @@ task downsample2bam {
         # downsample reads
         rasusa reads \
         --seed 42 \
-        --coverage 110 \
+        --coverage ~{coverage} \
         --genome-size ~{genome_size} \
         --output ~{id}.downsampled.bam \
         --output-format bam \

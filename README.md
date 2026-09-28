@@ -26,10 +26,13 @@ The workflow performs three main steps:
 | `id` | String | Sample identifier | 
 | `long_fq` | File | PacBio HiFi reads | 
 | `basemods` | Boolean | Whether to evaluate kinetics | 
+| `coverage` | Int | Target coverage for Rasusa downsampling | 
 
 > [!NOTE]
 > The `basemods` parameter is only applicable to the PBMA workflow. PBMA only accepts BAM input files, while the IPA workflow accepts both BAM and FASTQ input files. 
 
+> [!TIP]
+> If you want to skip the pre-downsampling step, you can set the `coverage` parameter to a value higher than the actual coverage of your input reads (e.g 1000). The workflow will still run Rasusa to ensure bam input for next step, but it will not downsample the reads. The samples will be downsampled by the PacBio Microbial Analysis pipeline in IPA task to the default coverage of 100x.
 ## Local Execution
 
 ### Requirements
