@@ -134,7 +134,7 @@ workflow pbma {
         } 
 
     output {
-        String version = "PBMA v0.3.0-dev"
+        String version = "PBMA v0.3.0"
         File pb_final_assembly = assembly.final_assembly
         File pb_final_rotated_assembly = assembly.final_rotated_assembly
         File pb_assembly_log = assembly.log
