@@ -26,15 +26,15 @@ The workflow performs two main steps:
 | `bam` | File | PacBio HiFi reads |  |
 | `run_basemods` | Boolean | Whether to evaluate kinetics | false |
 | `filter_min_qv` | Int | Minimum quality value for filtering reads | 20 |
-| `genome_size` | String | Estimated genome size |  |
+| `genome_size` | String | Estimated genome size | null (find automatically)|
 | `downsampled_coverage` | Int | Target coverage for downsampling | 100 |
-| `advanced_options_chrom` | String | Advanced options for chromosomal assembly | |
-| `advanced_options_plasmid` | String | Advanced options for plasmid assembly | |
+| `advanced_options_chrom` | String | Advanced options for chromosomal assembly | "" |
+| `advanced_options_plasmid` | String | Advanced options for plasmid assembly | "" |
 | `plasmid_contig_len_max` | Int | Maximum length of plasmid contigs | 300000 |
 | `run_secondary_polish` | Boolean | Whether to run secondary polishing | true |
 | `kineticstools_identify_mods` | String | Modifications to identify | "m4C,m6A" |
 | `kineticstools_p_value` | Float | P-value threshold for modifications | 0.001 |
-| `kineticstools_use_chemisty` | Boolean | Whether to use chemistry information | |
+| `kineticstools_use_chemisty` | String | chemistry information | "" |
 | `motif_min_score` | Int | Minimum score for motifs | 35 |
 | `motif_min_fraction` | Float | Minimum fraction of motifs | 0.3 |
 | `run_find_motifs` | Boolean | Whether to run motif finding | true |
