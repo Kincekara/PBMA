@@ -3,7 +3,6 @@ version 1.0
 task estimate_genome_size {
     input {
         File long_fq
-        Int cpu = 4
     }
 
     command <<<
@@ -15,7 +14,7 @@ task estimate_genome_size {
         # find genome size
         lrge \
         -P pb \
-        -t ~{cpu} \
+        -t 4 \
         -o gsize.txt \
         ~{long_fq}   
 
@@ -35,7 +34,7 @@ task estimate_genome_size {
 
     runtime {
         docker: "staphb/lrge:0.3.0"
-        cpu: cpu
+        cpu: 4
         memory: "8 GiB"
         disks: "local-disk 50 HDD"
         preemptible: 0
