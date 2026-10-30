@@ -8,10 +8,9 @@
 
 PBMA is a WDL workflow for assembling PacBio HiFi microbial reads using the PacBio's Improved Phased Assembly (IPA2). It is designed to run microbial analysis workflow outside of the PacBio SMRT Link environment. 
 
-The workflow performs three main steps:
+The workflow performs two main steps:
 
-1. Estimate the genome size using LRGE.
-2. Downsample the input reads to a target coverage using Rasusa.
+1. If not provided, estimate the genome size using LRGE.
 3. Assemble and polish the reads with PacBio's Microbial Analysis pipeline.
 
 ## Terra
@@ -19,20 +18,31 @@ The workflow performs three main steps:
 - The [PBMA](https://dockstore.org/workflows/github.com/Kincekara/PBMA/PBMA) pipeline is available in Dockstore as a that can be imported directly into Terra for cloud execution.
 
 - The alternative workflow [IPA](https://dockstore.org/workflows/github.com/Kincekara/PBMA/IPA) for fastq input files is also available in Dockstore.
-### Inputs
+### PBMA Inputs
 
-| Input | Type | Description |
-|-------|------|-------------|
-| `id` | String | Sample identifier | 
-| `long_fq` | File | PacBio HiFi reads | 
-| `basemods` | Boolean | Whether to evaluate kinetics | 
-| `coverage` | Int | Target coverage for Rasusa downsampling | 
+| Input | Type | Description | Default |
+|-------|------|-------------|---------|
+| `id` | String | Sample identifier |  |
+| `bam` | File | PacBio HiFi reads |  |
+| `run_basemods` | Boolean | Whether to evaluate kinetics | false |
+| `filter_min_qv` | Int | Minimum quality value for filtering reads | 20 |
+| `genome_size` | String | Estimated genome size |  |
+| `downsampled_coverage` | Int | Target coverage for downsampling | 100 |
+| `advanced_options_chrom` | String | Advanced options for chromosomal assembly | |
+| `advanced_options_plasmid` | String | Advanced options for plasmid assembly | |
+| `plasmid_contig_len_max` | Int | Maximum length of plasmid contigs | 300000 |
+| `run_secondary_polish` | Boolean | Whether to run secondary polishing | true |
+| `kineticstools_identify_mods` | String | Modifications to identify | "m4C,m6A" |
+| `kineticstools_p_value` | Float | P-value threshold for modifications | 0.001 |
+| `kineticstools_use_chemisty` | Boolean | Whether to use chemistry information | |
+| `motif_min_score` | Int | Minimum score for motifs | 35 |
+| `motif_min_fraction` | Float | Minimum fraction of motifs | 0.3 |
+| `run_find_motifs` | Boolean | Whether to run motif finding | true |
+| `nproc` | Int | Number of processors to use (per sample) | 8 |
 
 > [!NOTE]
-> The `basemods` parameter is only applicable to the PBMA workflow. PBMA only accepts BAM input files, while the IPA workflow accepts both BAM and FASTQ input files. 
+> The `run_basemods` parameter is only applicable to the PBMA workflow. PBMA only accepts BAM input files, while the IPA workflow accepts different file formats. 
 
-> [!TIP]
-> If you want to skip the pre-downsampling step, you can set the `coverage` parameter to a value higher than the actual coverage of your input reads (e.g 1000). The workflow will still run Rasusa to ensure bam input for next step, but it will not downsample the reads. The samples will be downsampled by the PacBio Microbial Analysis pipeline in IPA task to the default coverage of 100x.
 ## Local Execution
 
 ### Requirements
