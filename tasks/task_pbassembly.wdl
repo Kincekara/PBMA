@@ -4,10 +4,22 @@ task assembly {
     input {
         String id
         File bam
+        String filename
+        Int filter_min_qv
         String genome_size
-        Boolean basemods = false
-        Int cpu = 8
-        String filename = basename(bam, ".bam")
+        Boolean run_basemods   
+        Int downsampled_coverage
+        String advanced_options_chrom
+        String advanced_options_plasmid
+        Int plasmid_contig_len_max
+        Boolean run_secondary_polish
+        String kineticstools_identify_mods
+        Float kineticstools_p_value
+        String kineticstools_use_chemistry
+        Int motif_min_score
+        Float motif_min_fraction
+        Boolean run_find_motifs
+        Int cpu
     }
 
     command <<<
@@ -20,21 +32,22 @@ task assembly {
         # assembly
         pbcromwell run pb_microbial_analysis \
         -e ~{filename}.xml \
-        --task-option filter_min_qv=20 \
+        --task-option filter_min_qv=~{filter_min_qv} \
         --task-option dataset_filters="" \
         --task-option ipa2_genome_size=~{genome_size} \
-        --task-option ipa2_downsampled_coverage=100 \
-        --task-option ipa2_advanced_options_chrom="" \
-        --task-option ipa2_advanced_options_plasmid="" \
+        --task-option ipa2_downsampled_coverage=~{downsampled_coverage} \
+        --task-option ipa2_advanced_options_chrom=~{advanced_options_chrom} \
+        --task-option ipa2_advanced_options_plasmid=~{advanced_options_plasmid} \
         --task-option ipa2_cleanup_intermediate_files=True \
-        --task-option microasm_plasmid_contig_len_max=300000 \
-        --task-option microasm_run_secondary_polish=True \
-        --task-option run_basemods=~{basemods} \
-        --task-option kineticstools_identify_mods="m4C,m6A" \
-        --task-option kineticstools_p_value=0.001 \
-        --task-option motif_min_score=35 \
-        --task-option motif_min_fraction=0.3 \
-        --task-option run_find_motifs=True \
+        --task-option microasm_plasmid_contig_len_max=~{plasmid_contig_len_max} \
+        --task-option microasm_run_secondary_polish=~{run_secondary_polish} \
+        --task-option run_basemods=~{run_basemods} \
+        --task-option kineticstools_identify_mods=~{kineticstools_identify_mods} \
+        --task-option kineticstools_p_value=~{kineticstools_p_value} \
+        --task-option kineticstools_use_chemistry=~{kineticstools_use_chemistry} \
+        --task-option motif_min_score=~{motif_min_score} \
+        --task-option motif_min_fraction=~{motif_min_fraction} \
+        --task-option run_find_motifs=~{run_find_motifs} \
         --nproc ~{cpu} \
         --output-dir out > ~{id}.pbma.log
 
